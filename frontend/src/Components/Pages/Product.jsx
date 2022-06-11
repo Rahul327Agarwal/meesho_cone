@@ -20,7 +20,6 @@ const Product = () => {
             const user = await app.logIn(credentials);
             const allData = await user.functions.getAllData();
             setProductData(allData)
-            // console.log("data", allData)
         } catch (err) {
             console.error("Failed to log in", err);
         }

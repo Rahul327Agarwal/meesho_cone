@@ -5,12 +5,22 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { productPageAction } from '../../Redux/Action/productPageAction';
 
 
 
 const SearchPage = ({ productData }) => {
 
     const { setSearch_2, serchValue } = useContext(AppContext);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const funDispatch = (data) => {
+        dispatch(productPageAction(data));
+    }
     return <>
         <div style={{ marginTop: "10%", fontSize: 'large', fontWeight: 'bolder', marginLeft: '2%', marginRight: '2%' }} >
             <h1>Products Related with your search...</h1>
@@ -31,7 +41,12 @@ const SearchPage = ({ productData }) => {
 
                 }).map((e) => {
                     return <>
-                        <Card sx={{ width: '18rem', margin: "10px" }}>
+                        <Card sx={{ width: '18rem', margin: "10px" }} onClick={() => {
+                            funDispatch(e);
+                            { navigate("/ProductPage") }
+
+                        }}
+                        >
                             <CardMedia
                                 component="img"
                                 height="400"
